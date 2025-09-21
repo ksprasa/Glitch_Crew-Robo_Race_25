@@ -11,6 +11,21 @@ unsigned int sensorVals[NUM_SENSORS];
 void setup() {
   Serial.begin(9600);
   delay(1000);
+  // Calibration
+  for (int i = 0; i < 250; i++) {
+    qtrrc.calibrate();
+    delay(20);
+  }
+  for (uint8_t i = 0; i < NUM_SENSORS; i++) {
+    Serial.print(qtrrc.calibratedMinimumOn[i]);
+    Serial.print(' ');
+  }
+  Serial.println();
+  for (uint8_t i = 0; i < NUM_SENSORS; i++) {
+    Serial.print(qtrrc.calibratedMaximumOn[i]);
+    Serial.print(' ');
+  }
+  Serial.println();
 }
 
 void loop() {
